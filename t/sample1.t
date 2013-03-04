@@ -1,15 +1,13 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;     
+use Test::More tests => 1;
 
 use Language::l33t;
 
 my $output;
 open my $fh_output, '>', \$output;
-my $l33t = Language::l33t->new({ stdout => $fh_output });
-
-$l33t->load( <<'END_CODE' );
+Language::l33t->new( stdout => $fh_output, source => <<'END_CODE')->run;
     Gr34t l33tN3$$? 
     M3h...
     iT 41n't s0 7rIckY.
@@ -38,7 +36,5 @@ $l33t->load( <<'END_CODE' );
 
     5uxX0r5!!!L0L0L0L0L!!!!!!!
 END_CODE
-
-$l33t->run;
 
 is $output => 'H3LL0 W0RLD!!!', 'sample 1';
